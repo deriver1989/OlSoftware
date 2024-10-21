@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "4f7213af-758d-4944-b44b-7806b34e50bd",
+		"name": "prueba",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6100050",
+		"_collection_link": "https://orange-capsule-856281.postman.co/workspace/OlSoftware~b694504d-0a03-4fc8-9281-ce22c6fc8c95/collection/6100050-4f7213af-758d-4944-b44b-7806b34e50bd?action=share&source=collection_link&creator=6100050"
+	},
+	"item": [
+		{
+			"name": "Establecimiento",
+			"item": [
+				{
+					"name": "consultar establecimiento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/establecimiento/consultar/29",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimiento",
+								"consultar",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar establecimiento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/establecimiento/eliminar/31",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimiento",
+								"eliminar",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear establecimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"EL BARATON\",\r\n    \"ingresos\": 123456,\r\n    \"num_empleados\": 15,\r\n    \"comerciante_id\": 29\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/establecimiento/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimiento",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar establecimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"EL BARATON\",\r\n    \"ingresos\": 123456,\r\n    \"num_empleados\": 15,\r\n    \"comerciante_id\": 29,\r\n    \"id\": 31\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/establecimiento/actualizar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimiento",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comerciante",
+			"item": [
+				{
+					"name": "crear comerciante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"deiver1989@gmail.com\",\r\n    \"telefono\": \"123456\",\r\n    \"departamento\": \"Bolivar\",\r\n    \"municipio\": \"Cratagena\",\r\n    \"nombre\": \"Abastos la 99\",\r\n    \"estado\": \"ACTIVO\",\r\n    \"fecha_registro\": \"2024-10-20 23:28:54\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comerciante/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar comerciante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"deiver1989@gmail.com\",\r\n    \"telefono\": \"123456\",\r\n    \"departamento\": \"Bolivar\",\r\n    \"municipio\": \"Cratagena\",\r\n    \"nombre\": \"Abastos la 99 nuevo\",\r\n    \"estado\": \"ACTIVO\",\r\n    \"fecha_registro\": \"2024-10-20 23:28:54\",\r\n    \"id\": 41\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comerciante/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar comerciante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/eliminar/41",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"eliminar",
+								"41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hola mundo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/hello",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hola mundo security",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/helloSecured",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"helloSecured"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consulta de departamentos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/helloSecured",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"helloSecured"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consulta de municipios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/helloSecured",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"helloSecured"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/comerciante/consultar/1/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comerciante",
+						"consultar",
+						"1",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"deiver1989@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"username\": \"deiver1989@gmail.com\",\r\n    \"roles\": [\"USER\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/crearusuario",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crearusuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"123456\",\r\n    \"username\": \"deiver\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
