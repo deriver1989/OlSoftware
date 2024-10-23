@@ -2,6 +2,7 @@ package com.example.OlSoftwarePrueba.service;
 
 import com.example.OlSoftwarePrueba.reporitories.EstablecimientoRepository;
 
+import com.example.OlSoftwarePrueba.request.ComercianteConsultaIdDTO;
 import com.example.OlSoftwarePrueba.response.ResponseGenerarPdfDTO;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -15,6 +16,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,6 +30,9 @@ public class GenerarDocumentoServiceImpl {
 
     @Value("${patch.archivos}")
     String patchArchivo;
+
+    @Autowired
+    private ComercianteServiceImpl comercianteServiceImpl;
 
     public ResponseGenerarPdfDTO generarPdf(Long id) throws FileNotFoundException {
 
@@ -104,6 +111,76 @@ public class GenerarDocumentoServiceImpl {
         return respuesta;
     }
 
+
+
+    public  ResponseGenerarPdfDTO generarCvs(Integer idComerciante) {
+
+        LocalDateTime hora = LocalDateTime.now();
+        String archivoCSV = patchArchivo+"\\comerciante_" + hora.toString().replace(":", "") + ".csv";
+        FileWriter fileWriter = null;
+        PrintWriter printWriter = null;
+        ResponseGenerarPdfDTO respuesta;
+
+        try {
+            // Crear el FileWriter para el archivo
+            fileWriter = new FileWriter(archivoCSV);
+
+            // Usar PrintWriter para escribir en el archivo CSV
+            printWriter = new PrintWriter(fileWriter);
+
+            // Escribir encabezado del archivo CSV
+            printWriter.println("Nombre o razón social|Departamento|Municipio|" +
+                    "Teléfono|Correo Electrónico|Fecha de Registro|Estado|Cantidad de Establecimientos|Total Activos|" +
+                    "Cantidad de Empleados");
+
+            // Escribir algunas filas de datos
+
+            List<ComercianteConsultaIdDTO> lista = comercianteServiceImpl.consultarPorId(idComerciante);
+            if(!lista.isEmpty()){
+                for( ComercianteConsultaIdDTO t:lista) {
+                    printWriter.println(t.getNombre()+"|"+
+                            t.getDepartamento()+"|"+
+                            t.getMunicipio()+"|"+
+                            t.getTelefono()+"|"+
+                            t.getEmail()+"|"+
+                            t.getFecha_registro()+"|"+
+                            t.getEstado()+"|"+
+                            t.getNum_establecimientos()+"|"+
+                            t.getActivos()+"|"+
+                            t.getEmpleados());
+                }
+
+            }
+
+            System.out.println("Archivo CSV creado correctamente.");
+
+            respuesta = ResponseGenerarPdfDTO.builder()
+                    .status(true)
+                    .message("PDF creado exitosamente en: " + archivoCSV)
+                    .archivo("")
+                    .build();
+
+        } catch ( Exception e) {
+            respuesta = ResponseGenerarPdfDTO.builder()
+                    .status(false)
+                    .message("Ha ocurrido un error generando el CVS.")
+                    .build();
+        }  finally {
+            // Asegurarse de cerrar los recursos
+            if (printWriter != null) {
+                printWriter.close();
+            }
+            try {
+                if (fileWriter != null) {
+                    fileWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return respuesta;
+    }
 
 
 }

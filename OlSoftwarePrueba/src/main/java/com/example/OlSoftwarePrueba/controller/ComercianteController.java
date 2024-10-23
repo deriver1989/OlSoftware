@@ -1,6 +1,7 @@
 package com.example.OlSoftwarePrueba.controller;
 
 
+import com.example.OlSoftwarePrueba.request.ComercianteConsultaIdDTO;
 import com.example.OlSoftwarePrueba.request.ComercianteDTO;
 import com.example.OlSoftwarePrueba.response.ResponseDTO;
 import com.example.OlSoftwarePrueba.service.ComercianteServiceImpl;
@@ -77,6 +78,22 @@ public class ComercianteController {
         try {
             ResponseDTO response = null;
             List<Object[]> lista = comercianteServiceImpl.consultarComerciante();
+            response = new ResponseDTO(200, "Consulta OK", lista);
+            return response;
+
+        } catch (Exception e) {
+            // Respuesta estándar en caso de error
+            ResponseDTO response = new ResponseDTO(404, "Error al eliminar el comerciante", null);
+            return response;
+        }
+    }
+
+
+    @GetMapping("/comerciante/consultar-id/{idComerciante}")
+    public ResponseDTO consultarComerciante(@PathVariable Integer idComerciante){
+        try {
+            ResponseDTO response = null;
+            List<ComercianteConsultaIdDTO> lista = comercianteServiceImpl.consultarPorId(idComerciante);
             response = new ResponseDTO(200, "Consulta OK", lista);
             return response;
 

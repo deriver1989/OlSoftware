@@ -15,13 +15,13 @@ public class DocumentoController {
 
 
     @GetMapping("/comerciante/gererar-pdf/{idComerciante}")
-    public ResponseDTO actualizarComerciante(@PathVariable Long idComerciante){
+    public ResponseDTO generarPdf(@PathVariable Long idComerciante) {
         try {
             ResponseDTO response = null;
             ResponseGenerarPdfDTO respuesta = generarDocumentoService.generarPdf(idComerciante);
-            if(respuesta.getStatus()) {
+            if (respuesta.getStatus()) {
                 response = new ResponseDTO(200, respuesta.getMessage(), respuesta);
-            }else{
+            } else {
                 response = new ResponseDTO(200, respuesta.getMessage(), false);
             }
             return response;
@@ -32,6 +32,28 @@ public class DocumentoController {
             return response;
         }
     }
+
+
+
+    @GetMapping("/comerciante/gererar-cvs/{idComerciante}")
+    public ResponseDTO generarCvs(@PathVariable Integer idComerciante) {
+        try {
+            ResponseDTO response = null;
+            ResponseGenerarPdfDTO respuesta = generarDocumentoService.generarCvs(idComerciante);
+            if (respuesta.getStatus()) {
+                response = new ResponseDTO(200, respuesta.getMessage(), respuesta);
+            } else {
+                response = new ResponseDTO(200, respuesta.getMessage(), false);
+            }
+            return response;
+
+        } catch (Exception e) {
+            // Respuesta estándar en caso de error
+            ResponseDTO response = new ResponseDTO(404, "Error al generar el archivo pdf.", null);
+            return response;
+        }
+    }
+
 
 
 

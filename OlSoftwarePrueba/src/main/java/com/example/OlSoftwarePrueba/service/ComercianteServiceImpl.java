@@ -1,13 +1,16 @@
 package com.example.OlSoftwarePrueba.service;
 
+import com.example.OlSoftwarePrueba.request.ComercianteConsultaIdDTO;
 import com.example.OlSoftwarePrueba.request.ComercianteDTO;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.ParameterMode;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.StoredProcedureQuery;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import org.hibernate.dialect.OracleTypes;
 import org.springframework.stereotype.Service;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -129,9 +132,49 @@ public class ComercianteServiceImpl {
         }
     }
 
-    public Boolean consultarPorId(Integer id){
-        return true;
+    public List<ComercianteConsultaIdDTO> consultarPorId(Integer id) throws Exception {
+
+        ArrayList<Exception> excepciones=new ArrayList<>();
+        List<Object[]> resultado = new ArrayList<>();
+        ArrayList<ResultSet> resultadoConsulta = new ArrayList<>();;
+        ((org.hibernate.internal.SessionImpl)entityManager.getDelegate()).doWork(x->{
+            try{
+                java.sql.CallableStatement s=x.prepareCall("BEGIN ?:=PKS_COMERCIANTE.consultar_comerciantes_cursor; END;");
+                s.registerOutParameter(1, OracleTypes.CURSOR);
+                //s.setInt(2,id);
+                s.executeUpdate();
+                resultadoConsulta.add ((ResultSet) s.getObject(1));
+            }catch(Exception ex){
+                excepciones.add(ex);
+            }
+        });
+        if(excepciones.size()>0){
+            throw excepciones.get(0);
+        }
+        List<ComercianteConsultaIdDTO> listado =  new ArrayList<>();
+        if(!resultadoConsulta.isEmpty()) {
+            ResultSet resulset = resultadoConsulta.get(0);
+            while (resulset.next()) {
+                ComercianteConsultaIdDTO dato = ComercianteConsultaIdDTO
+                        .builder()
+                        .nombre(resulset.getString("nombre"))
+                        .departamento(resulset.getString("departamento"))
+                        .municipio(resulset.getString("municipio"))
+                        .telefono(resulset.getString("telefono"))
+                        .email(resulset.getString("email"))
+                        .fecha_registro(resulset.getDate("fecha_registro"))
+                        .estado(resulset.getString("estado"))
+                        .activos(resulset.getDouble("activos"))
+                        .empleados(resulset.getLong("num_empleados"))
+                        .build();
+                listado.add(dato);
+            }
+        }
+
+        return listado;
     }
+
+
 
 
 }
