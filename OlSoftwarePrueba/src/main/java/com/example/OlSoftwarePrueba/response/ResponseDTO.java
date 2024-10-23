@@ -1,4 +1,4 @@
-package com.example.OlSoftwarePrueba.request;
+package com.example.OlSoftwarePrueba.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

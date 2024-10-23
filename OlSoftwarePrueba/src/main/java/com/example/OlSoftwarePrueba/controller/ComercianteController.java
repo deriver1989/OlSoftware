@@ -2,7 +2,7 @@ package com.example.OlSoftwarePrueba.controller;
 
 
 import com.example.OlSoftwarePrueba.request.ComercianteDTO;
-import com.example.OlSoftwarePrueba.request.ResponseDTO;
+import com.example.OlSoftwarePrueba.response.ResponseDTO;
 import com.example.OlSoftwarePrueba.service.ComercianteServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

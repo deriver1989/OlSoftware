@@ -2,10 +2,8 @@ package com.example.OlSoftwarePrueba.controller;
 
 
 import com.example.OlSoftwarePrueba.entities.EstablecimientoEntity;
-import com.example.OlSoftwarePrueba.request.ComercianteDTO;
 import com.example.OlSoftwarePrueba.request.EstablecimientoDTO;
-import com.example.OlSoftwarePrueba.request.ResponseDTO;
-import com.example.OlSoftwarePrueba.service.ComercianteServiceImpl;
+import com.example.OlSoftwarePrueba.response.ResponseDTO;
 import com.example.OlSoftwarePrueba.service.EstablecimientoServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
