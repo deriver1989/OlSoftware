@@ -77,8 +77,8 @@ public class ComercianteController {
     public ResponseDTO consultarComerciante(@PathVariable Long pagina, @PathVariable Long cantidad){
         try {
             ResponseDTO response = null;
-            List<Object[]> lista = comercianteServiceImpl.consultarComerciante();
-            response = new ResponseDTO(200, "Consulta OK", lista);
+            comercianteServiceImpl.consultarComerciantePaginado(pagina, cantidad);
+            response = new ResponseDTO(200, "Consulta OK", null);
             return response;
 
         } catch (Exception e) {

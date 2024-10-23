@@ -39,7 +39,7 @@ public class DocumentoController {
     public ResponseDTO generarCvs(@PathVariable Integer idComerciante) {
         try {
             ResponseDTO response = null;
-            ResponseGenerarPdfDTO respuesta = generarDocumentoService.generarCvs(idComerciante);
+            ResponseGenerarPdfDTO respuesta = generarDocumentoService.generarCvs();
             if (respuesta.getStatus()) {
                 response = new ResponseDTO(200, respuesta.getMessage(), respuesta);
             } else {

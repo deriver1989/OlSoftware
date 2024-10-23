@@ -111,9 +111,7 @@ public class GenerarDocumentoServiceImpl {
         return respuesta;
     }
 
-
-
-    public  ResponseGenerarPdfDTO generarCvs(Integer idComerciante) {
+    public  ResponseGenerarPdfDTO generarCvs() {
 
         LocalDateTime hora = LocalDateTime.now();
         String archivoCSV = patchArchivo+"\\comerciante_" + hora.toString().replace(":", "") + ".csv";
@@ -135,7 +133,7 @@ public class GenerarDocumentoServiceImpl {
 
             // Escribir algunas filas de datos
 
-            List<ComercianteConsultaIdDTO> lista = comercianteServiceImpl.consultarPorId(idComerciante);
+            List<ComercianteConsultaIdDTO> lista = comercianteServiceImpl.consultarComerciante();
             if(!lista.isEmpty()){
                 for( ComercianteConsultaIdDTO t:lista) {
                     printWriter.println(t.getNombre()+"|"+

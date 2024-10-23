@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.hibernate.dialect.OracleTypes;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -59,7 +60,8 @@ public class ComercianteServiceImpl {
 
     }
 
-    @Transactional
+
+
     public Boolean actualizarComerciante(ComercianteDTO request){
         StoredProcedureQuery storedProcedure = entityManager
                 .createStoredProcedureQuery("PKS_COMERCIANTE.actualizar_comerciante");
@@ -100,39 +102,7 @@ public class ComercianteServiceImpl {
 
     }
 
-    public List consultarComerciante(){
-
-        return null;
-    }
-
-
-    @Transactional
-    public Boolean eliminarComerciante(Long request){
-        StoredProcedureQuery storedProcedure = entityManager
-                .createStoredProcedureQuery("PKS_COMERCIANTE.eliminar_comerciante");
-
-        // Registrar los parámetros de entrada
-        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(2, Long.class, ParameterMode.OUT);
-        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.OUT);
-
-        // Establecer los valores de los parámetros
-        storedProcedure.setParameter(1,request);
-
-        // Ejecutar el procedimiento almacenado
-        storedProcedure.execute();
-
-        Long estado = (Long) storedProcedure.getOutputParameterValue(2);
-        String mensaje = (String) storedProcedure.getOutputParameterValue(3);
-        System.out.println(mensaje);
-        if (estado == 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public List<ComercianteConsultaIdDTO> consultarPorId(Integer id) throws Exception {
+    public List<ComercianteConsultaIdDTO>  consultarComerciante() throws Exception {
 
         ArrayList<Exception> excepciones=new ArrayList<>();
         List<Object[]> resultado = new ArrayList<>();
@@ -174,6 +144,41 @@ public class ComercianteServiceImpl {
         return listado;
     }
 
+
+    @Transactional
+    public Boolean eliminarComerciante(Long request){
+        StoredProcedureQuery storedProcedure = entityManager
+                .createStoredProcedureQuery("PKS_COMERCIANTE.eliminar_comerciante");
+
+        // Registrar los parámetros de entrada
+        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+        storedProcedure.registerStoredProcedureParameter(2, Long.class, ParameterMode.OUT);
+        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.OUT);
+
+        // Establecer los valores de los parámetros
+        storedProcedure.setParameter(1,request);
+
+        // Ejecutar el procedimiento almacenado
+        storedProcedure.execute();
+
+        Long estado = (Long) storedProcedure.getOutputParameterValue(2);
+        String mensaje = (String) storedProcedure.getOutputParameterValue(3);
+        System.out.println(mensaje);
+        if (estado == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public List<ComercianteConsultaIdDTO> consultarPorId(Integer id) throws Exception {
+
+        return null;
+    }
+
+    public Boolean consultarComerciantePaginado(Long pagina, Long cantidad){
+        return null;
+    }
 
 
 
