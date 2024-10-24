@@ -1,14 +1,12 @@
 package com.example.OlSoftwarePrueba.reporitories;
 
-import com.example.OlSoftwarePrueba.entities.UserEntity;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import com.example.OlSoftwarePrueba.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-@Repository
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    Optional<UserEntity> findByUsername (String username);
+  Optional<User> findByEmail(String email);
 
 }
