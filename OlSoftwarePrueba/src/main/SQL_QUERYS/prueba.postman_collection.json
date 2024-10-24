@@ -198,6 +198,71 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "consultar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/consultar-id/29",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"consultar-id",
+								"29"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Generar Documentos",
+			"item": [
+				{
+					"name": "generar pdf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/establecimiento/gererar-pdf/29",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimiento",
+								"gererar-pdf",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generar CVS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/gererar-cvs/29",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"gererar-cvs",
+								"29"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -214,24 +279,6 @@
 					"port": "8080",
 					"path": [
 						"hello"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "hola mundo security",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/helloSecured",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"helloSecured"
 					]
 				}
 			},
@@ -289,60 +336,6 @@
 						"consultar",
 						"1",
 						"5"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "crear usuario",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"deiver1989@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"username\": \"deiver1989@gmail.com\",\r\n    \"roles\": [\"USER\"]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/crearusuario",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"crearusuario"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"123456\",\r\n    \"username\": \"deiver\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/login",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"login"
 					]
 				}
 			},
