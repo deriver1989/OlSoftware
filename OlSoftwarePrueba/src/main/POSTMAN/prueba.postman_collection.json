@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "4f7213af-758d-4944-b44b-7806b34e50bd",
+		"name": "prueba",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6100050",
+		"_collection_link": "https://orange-capsule-856281.postman.co/workspace/OlSoftware~b694504d-0a03-4fc8-9281-ce22c6fc8c95/collection/6100050-4f7213af-758d-4944-b44b-7806b34e50bd?action=share&source=collection_link&creator=6100050"
+	},
+	"item": [
+		{
+			"name": "Comerciante",
+			"item": [
+				{
+					"name": "crear comerciante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiIsInN1YiI6ImRlcml2ZXIxOTg5QG1haWwuY29tIiwiaWF0IjoxNzQ4MTk3NTIzLCJleHAiOjE3NDgyMDExMjN9.RDPBkX9-Xq0DFxztOWftaeirr21U7LCkZiQ4oEoVsUuC4OBX_8UHVBpOuy18I8ey",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"deiver1989@gmail.com\",\r\n    \"telefono\": \"123456\",\r\n    \"municipio\": \"Cartagena\",\r\n    \"nombre\": \"Abastos la 99\",\r\n    \"estado\": \"ACTIVO\",\r\n    \"fecha_registro\": \"2025-05-24 02:45:18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comerciante/crear",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar comerciante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiIsInN1YiI6ImRlcml2ZXIxOTg5QG1haWwuY29tIiwiaWF0IjoxNzQ4MTk3NTIzLCJleHAiOjE3NDgyMDExMjN9.RDPBkX9-Xq0DFxztOWftaeirr21U7LCkZiQ4oEoVsUuC4OBX_8UHVBpOuy18I8ey",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"deiver1989@gmail.com\",\r\n    \"telefono\": \"123456\",\r\n    \"municipio\": \"Cratagena\",\r\n    \"nombre\": \"Abastos la 99 nuevo\",\r\n    \"estado\": \"ACTIVO\",\r\n    \"fecha_registro\": \"2024-10-20 23:28:54\",\r\n    \"id\": 22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comerciante/actualizar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar comerciante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbm5hIFBlcmVhIiwic3ViIjoianVhbmEucGVyZWEuZ2F6YWJvbkBtYWlsLmNvbSIsImlhdCI6MTc0ODIwNzQyNSwiZXhwIjoxNzQ4MjExMDI1fQ.nce_Jo9rsJDxl5mchGrrzcUCxZ04xgWwpPAljLlgiTHoYBBnp5AlGzirC4gCEBvF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/eliminar/22",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"eliminar",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultar por id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiBBbGJlcnRvIiwic3ViIjoianVhbmEucGVyZWFAbWFpbC5jb20iLCJpYXQiOjE3NDgyMDg3MjYsImV4cCI6MTc0ODIxMjMyNn0.PIk_Uk5NGKHjSjRzlpB3vFDYm2TW7hrhweOyIEUvZfk8o93zKUDcmO3MyRh7Y-ZU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/consultar-id/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"consultar-id",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultar paginado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiBBbGJlcnRvIiwic3ViIjoianVhbmEucGVyZWFAbWFpbC5jb20iLCJpYXQiOjE3NDgyMDg3MjYsImV4cCI6MTc0ODIxMjMyNn0.PIk_Uk5NGKHjSjRzlpB3vFDYm2TW7hrhweOyIEUvZfk8o93zKUDcmO3MyRh7Y-ZU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/consultar?nombre=fernando&page=0&size=20\n",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"consultar"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "fernando"
+								},
+								{
+									"key": "fechaRegistroDesde",
+									"value": "2025-05-23",
+									"disabled": true
+								},
+								{
+									"key": "fechaRegistroHasta",
+									"value": "2025-05-24",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "INACTIVO",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cambiar estado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiIsInN1YiI6ImRlcml2ZXIxOTg5QG1haWwuY29tIiwiaWF0IjoxNzQ4MTg5Nzk1LCJleHAiOjE3NDgxOTMzOTV9.uFPBYcCF7c1ZV6YdZQ6iXsyQ2h8Fk4wFd6ynCV8qerb5I2nivYPsAIaGOB16HkYq",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/21/estado?estado=INACTIVO",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"21",
+								"estado"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "INACTIVO"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Generar Documentos",
+			"item": [
+				{
+					"name": "generar CVS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiBBbGJlcnRvIiwic3ViIjoianVhbmEucGVyZWFAbWFpbC5jb20iLCJpYXQiOjE3NDgyMDg3MjYsImV4cCI6MTc0ODIxMjMyNn0.PIk_Uk5NGKHjSjRzlpB3vFDYm2TW7hrhweOyIEUvZfk8o93zKUDcmO3MyRh7Y-ZU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciante/gererar-cvs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciante",
+								"gererar-cvs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/refresh-token",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consulta de municipios",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJuYW1lIjoiSnVhbiBBbGJlcnRvIiwic3ViIjoianVhbmEucGVyZWFAbWFpbC5jb20iLCJpYXQiOjE3NDgyMDg3MjYsImV4cCI6MTc0ODIxMjMyNn0.PIk_Uk5NGKHjSjRzlpB3vFDYm2TW7hrhweOyIEUvZfk8o93zKUDcmO3MyRh7Y-ZU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/consultar-municipios",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"consultar-municipios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
