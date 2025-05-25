@@ -1,11 +1,11 @@
 package com.example.OlSoftwarePrueba;
 
-import com.example.OlSoftwarePrueba.reporitories.MunicipioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
+@EnableCaching
 public class OlSoftwarePruebaApplication {
 
 	public static void main(String[] args) {
