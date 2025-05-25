@@ -22,8 +22,6 @@ public class ComercianteConsultaIdDTO {
     @NotBlank
     private String nombre;
 
-    @NotBlank
-    private String departamento;
 
     @NotBlank
     private String municipio;

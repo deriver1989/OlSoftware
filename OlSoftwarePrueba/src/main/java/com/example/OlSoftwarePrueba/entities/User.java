@@ -13,21 +13,24 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "usuario")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, name = "NOMBRE")
   private String name;
 
-  @Column(nullable = false, unique = true)
+  @Column(name = "CORREO_ELECTRONICO" ,nullable = false, unique = true)
   private String email;
 
-  @Column(nullable = false)
+  @Column(name = "PASS", nullable = false)
   private String password;
+
+  @Column( name = "ROL")
+  private String rol;
 
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;

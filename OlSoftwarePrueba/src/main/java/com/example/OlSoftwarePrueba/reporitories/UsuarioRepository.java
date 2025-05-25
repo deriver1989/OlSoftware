@@ -1,5 +1,6 @@
 package com.example.OlSoftwarePrueba.reporitories;
 
+import com.example.OlSoftwarePrueba.entities.User;
 import com.example.OlSoftwarePrueba.entities.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -7,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends CrudRepository<UserEntity, Long> {
+public interface UsuarioRepository extends CrudRepository<User, Integer> {
 
-    Optional<UserEntity> findByUsername (String username);
+    Optional<User> findByEmail (String username);
 
 }
