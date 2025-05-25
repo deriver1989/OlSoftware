@@ -1,14 +1,9 @@
 package com.example.OlSoftwarePrueba;
 
-import com.example.OlSoftwarePrueba.entities.DepartamentoEntity;
-import com.example.OlSoftwarePrueba.entities.MunicipioEntity;
-import com.example.OlSoftwarePrueba.reporitories.DepartamentoRepository;
 import com.example.OlSoftwarePrueba.reporitories.MunicipioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class OlSoftwarePruebaApplication {
@@ -17,13 +12,11 @@ public class OlSoftwarePruebaApplication {
 		SpringApplication.run(OlSoftwarePruebaApplication.class, args);
 	}
 
-	@Autowired
-	private MunicipioRepository municipioRepository;
+	//@Autowired
+	//private MunicipioRepository municipioRepository;
 
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
 
-	@Bean
+	/*@Bean
 	CommandLineRunner init(){
 		return args -> {
 
@@ -34,6 +27,6 @@ public class OlSoftwarePruebaApplication {
 			departamentoRepository.save(DepartamentoEntity.builder().nombre("BOLIVAR").build());
 		};
 
-	}
+	}*/
 
 }

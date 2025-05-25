@@ -1,16 +1,24 @@
 package com.example.OlSoftwarePrueba.service;
 
+import com.example.OlSoftwarePrueba.entities.ComercianteEntity;
+import com.example.OlSoftwarePrueba.reporitories.ComercianteRepository;
 import com.example.OlSoftwarePrueba.request.ComercianteConsultaIdDTO;
 import com.example.OlSoftwarePrueba.request.ComercianteDTO;
+import com.example.OlSoftwarePrueba.request.ComercianteFiltro;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.hibernate.dialect.OracleTypes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,43 +26,29 @@ import java.util.List;
 @Service
 public class ComercianteServiceImpl {
 
+    @Autowired
+    private ComercianteRepository comercianteRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
     public Boolean guardarComerciante(ComercianteDTO request){
-        StoredProcedureQuery storedProcedure = entityManager
-                .createStoredProcedureQuery("PKS_COMERCIANTE.crear_comerciante");
-
-        // Registrar los parámetros de entrada
-        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(4, Date.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(5, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(6, Long.class, ParameterMode.OUT);
-        storedProcedure.registerStoredProcedureParameter(7, String.class, ParameterMode.OUT);
-        storedProcedure.registerStoredProcedureParameter(8, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(9, String.class, ParameterMode.IN);
-
-        // Establecer los valores de los parámetros
-        storedProcedure.setParameter(1, request.getNombre());
-        storedProcedure.setParameter(2, request.getDepartamento());
-        storedProcedure.setParameter(3, request.getMunicipio());
-        storedProcedure.setParameter(4, request.getFecha_registro());
-        storedProcedure.setParameter(5, request.getEstado());
-        storedProcedure.setParameter(8, request.getTelefono());
-        storedProcedure.setParameter(9, request.getEmail());
-
-        // Ejecutar el procedimiento almacenado
-        storedProcedure.execute();
-
-        Long estado = (Long) storedProcedure.getOutputParameterValue(6);
-        String mensaje = (String) storedProcedure.getOutputParameterValue(7);
-
-        if (estado == 0){
+        ComercianteEntity c = ((request.getId() == null)
+                ? new ComercianteEntity()
+                : comercianteRepository.findById(request.getId()).orElse(null));
+        if(c != null){
+            c.setNombre(request.getNombre());
+            c.setMunicipio(request.getMunicipio());
+            c.setTelefono(request.getTelefono());
+            c.setCorreo_electronico(request.getEmail());
+            c.setFecha_registro(request.getFecha_registro());
+            c.setEstado(request.getEstado());
+            c.setFecha_actualizacion(LocalDateTime.now());
+            c.setUsuario(request.getUsuario());
+            comercianteRepository.save(c);
             return true;
-        }else{
+        }else {
             return false;
         }
 
@@ -63,40 +57,20 @@ public class ComercianteServiceImpl {
 
 
     public Boolean actualizarComerciante(ComercianteDTO request){
-        StoredProcedureQuery storedProcedure = entityManager
-                .createStoredProcedureQuery("PKS_COMERCIANTE.actualizar_comerciante");
 
-        // Registrar los parámetros de entrada
-        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(4, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(5, Date.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(6, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(7, Long.class, ParameterMode.OUT);
-        storedProcedure.registerStoredProcedureParameter(8, String.class, ParameterMode.OUT);
-        storedProcedure.registerStoredProcedureParameter(9, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(10, String.class, ParameterMode.IN);
-
-        // Establecer los valores de los parámetros
-        storedProcedure.setParameter(1, request.getId());
-        storedProcedure.setParameter(2, request.getNombre());
-        storedProcedure.setParameter(3, request.getDepartamento());
-        storedProcedure.setParameter(4, request.getMunicipio());
-        storedProcedure.setParameter(5, request.getFecha_registro());
-        storedProcedure.setParameter(6, request.getEstado());
-        storedProcedure.setParameter(9, request.getTelefono());
-        storedProcedure.setParameter(10, request.getEmail());
-
-        // Ejecutar el procedimiento almacenado
-        storedProcedure.execute();
-
-        Long estado = (Long) storedProcedure.getOutputParameterValue(6);
-        String mensaje = (String) storedProcedure.getOutputParameterValue(7);
-
-        if (estado == 0){
+        ComercianteEntity c =  comercianteRepository.findById(request.getId()).orElse(null);
+        if(c != null){
+            c.setNombre(request.getNombre());
+            c.setMunicipio(request.getMunicipio());
+            c.setTelefono(request.getTelefono());
+            c.setCorreo_electronico(request.getEmail());
+            c.setFecha_registro(request.getFecha_registro());
+            c.setEstado(request.getEstado());
+            c.setFecha_actualizacion(LocalDateTime.now());
+            c.setUsuario(request.getUsuario());
+            comercianteRepository.save(c);
             return true;
-        }else{
+        }else {
             return false;
         }
 
@@ -128,13 +102,12 @@ public class ComercianteServiceImpl {
                 ComercianteConsultaIdDTO dato = ComercianteConsultaIdDTO
                         .builder()
                         .nombre(resulset.getString("nombre"))
-                        .departamento(resulset.getString("departamento"))
                         .municipio(resulset.getString("municipio"))
                         .telefono(resulset.getString("telefono"))
-                        .email(resulset.getString("email"))
+                        .email(resulset.getString("correo_electronico"))
                         .fecha_registro(resulset.getDate("fecha_registro"))
                         .estado(resulset.getString("estado"))
-                        .activos(resulset.getDouble("activos"))
+                        .activos(resulset.getDouble("ingresos"))
                         .empleados(resulset.getLong("num_empleados"))
                         .build();
                 listado.add(dato);
@@ -147,39 +120,33 @@ public class ComercianteServiceImpl {
 
     @Transactional
     public Boolean eliminarComerciante(Long request){
-        StoredProcedureQuery storedProcedure = entityManager
-                .createStoredProcedureQuery("PKS_COMERCIANTE.eliminar_comerciante");
-
-        // Registrar los parámetros de entrada
-        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter(2, Long.class, ParameterMode.OUT);
-        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.OUT);
-
-        // Establecer los valores de los parámetros
-        storedProcedure.setParameter(1,request);
-
-        // Ejecutar el procedimiento almacenado
-        storedProcedure.execute();
-
-        Long estado = (Long) storedProcedure.getOutputParameterValue(2);
-        String mensaje = (String) storedProcedure.getOutputParameterValue(3);
-        System.out.println(mensaje);
-        if (estado == 0){
+        ComercianteEntity c =  comercianteRepository.findById(request).orElse(null);
+        if(c != null){
+            comercianteRepository.delete(c);
             return true;
-        }else{
+        }else {
             return false;
         }
     }
 
-    public List<ComercianteConsultaIdDTO> consultarPorId(Integer id) throws Exception {
-
-        return null;
+    public ComercianteEntity consultarPorId(Long id) throws Exception {
+        return  comercianteRepository.findById(id).orElse(null);
     }
 
-    public Boolean consultarComerciantePaginado(Long pagina, Long cantidad){
-        return null;
+    public Page<ComercianteEntity> consultarComerciantePaginado (ComercianteFiltro filtro, Pageable pageable) {
+            Specification<ComercianteEntity> spec = ComercianteSpecification.filtro(filtro);
+            return comercianteRepository.findAll(spec, pageable);
     }
 
-
+    public Boolean cambiarEstado(Long id, String estado){
+        ComercianteEntity c =  comercianteRepository.findById(id).orElse(null);
+        if(c != null){
+            c.setEstado(estado);
+            comercianteRepository.save(c);
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }

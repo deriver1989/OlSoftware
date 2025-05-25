@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -21,13 +22,11 @@ public class ComercianteDTO {
     private String nombre;
 
     @NotBlank
-    private String departamento;
-
-    @NotBlank
     private String municipio;
 
+    //@NotBlank
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date fecha_registro;
+    private LocalDateTime fecha_registro;
 
     @NotBlank
     private String estado;
@@ -35,4 +34,6 @@ public class ComercianteDTO {
     private String telefono;
 
     private Long id;
+
+    private Long usuario;
 }
